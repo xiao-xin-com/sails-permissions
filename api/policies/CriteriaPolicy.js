@@ -60,7 +60,7 @@ module.exports = function(req, res, next) {
         body = undefined;
       }
 
-      if (!PermissionService.hasPassingCriteria(objects, permissions, body, req.user.id)) {
+      if (req.user && !PermissionService.hasPassingCriteria(objects, permissions, body, req.user.id)) {
         return res.send(403, {
           error: 'Can\'t ' + action + ', because of failing where clause or attribute permissions'
         });
